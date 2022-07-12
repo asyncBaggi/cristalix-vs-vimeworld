@@ -1,33 +1,5 @@
 let vimeOnline = null;
 let cristaOnline = null;
-function updateData(vimeOnline, cristaOnline){
-    console.log("updating data!")
-    const oldDates = chart.data.labels;
-    oldDates.shift()
-    let time = "00:00:02";
-    let hour = 0;
-    let minutes = 0;
-    let seconds = 2;
-    console.log(seconds)
-    if (seconds === 60) {
-        seconds = 0
-        minutes++
-        if (minutes === 60) {
-            hour++
-            minutes = 0
-        }
-    }
-    seconds++
-    time = hour+":"+minutes+":"+seconds
-    oldDates.push(time.toString())
-    console.log(vimeOnline)
-    console.log(cristaOnline)
-    chart.data.datasets[0].data = vimeOnline;
-    chart.data.datasets[1].data = cristaOnline;
-    chart.update();
-}
-
-
 $(document).ready(function(){
     var count = 19;
     const data = {
@@ -47,7 +19,6 @@ $(document).ready(function(){
             }
         ]
     };
-    // this is ugly, don't judge me
     var updateData = function(oldData){
 
         getJSON('https://api.vimeworld.com/online', function(err, data) {vimeOnline = data.total})
@@ -73,32 +44,19 @@ $(document).ready(function(){
     };
 
     var optionsAnimation = {
-        //Boolean - If we want to override with a hard coded scale
         scaleOverride : true,
-        //** Required if scaleOverride is true **
-        //Number - The number of steps in a hard coded scale
         scaleSteps : 10,
-        //Number - The value jump in the hard coded scale
         scaleStepWidth : 10,
-        //Number - The scale starting value
         scaleStartValue : 0
     }
 
-    // Not sure why the scaleOverride isn't working...
     var optionsNoAnimation = {
         type: "line",
-        //Boolean - If we want to override with a hard coded scale
         scaleOverride : true,
-        //** Required if scaleOverride is true **
-        //Number - The number of steps in a hard coded scale
         scaleSteps : 20,
-        //Number - The value jump in the hard coded scale
         scaleStepWidth : 10,
-        //Number - The scale starting value
         scaleStartValue : 0
     }
-
-    //Get the context of the canvas element we want to select
     var ctx = document.getElementById("myChart").getContext("2d");
     var optionsNoAnimation = {animation : false}
     var myNewChart = new Chart(ctx);
@@ -107,7 +65,7 @@ $(document).ready(function(){
     setInterval(function(){
         updateData(data);
         myNewChart.Line(data, optionsNoAnimation)
-        ;}, 1000
+        ;}, 10000
     );
 });
 
