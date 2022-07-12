@@ -62,11 +62,20 @@ $(document).ready(function(){
     var myNewChart = new Chart(ctx);
     myNewChart.Line(data, optionsNoAnimation);
 
-    setInterval(function(){
+    setTimeout(function (){
         updateData(data);
         myNewChart.Line(data, optionsNoAnimation)
-        ;}, 10000
-    );
+        setTimeout(function (){
+            updateData(data);
+            myNewChart.Line(data, optionsNoAnimation)
+            setInterval(function(){
+                updateData(data);
+                myNewChart.Line(data, optionsNoAnimation)
+                ;}, 5000
+            );
+        },10)
+    },10)
+
 });
 
 
