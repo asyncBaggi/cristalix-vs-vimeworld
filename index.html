@@ -1,0 +1,87 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Cristalix VS VimeWorld</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        :root {
+            --shadows: none;
+            --shadows-lite: none;
+            --shadows-vanish: none;
+        }
+        body {
+            background-color: #000000;
+            margin: 10px auto;
+            width: 100%;
+            font-family: 'Montserrat';
+            font-size: 50px;
+            text-align: center;
+        }
+        .block-horizontal {
+            align-self: center;
+            background-size: 1390px 430px;
+            background-position: 0px 0px;
+            transition: 0.2s;
+            z-index: 10;
+            /*width: 680px;*/
+            height: 830px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-sizing: border-box;
+            position: center;
+            -webkit-box-shadow: var(--shadows);
+            -moz-box-shadow: var(--shadows);
+            box-shadow: var(--shadows);
+        }
+        .online-cristlaix {
+            color: #1b00ff;
+        }
+        .online-vimeworld {
+            color: rgb(85,255,0);
+        }
+        .background-home5 {
+            background-image: url(images/cristalix_background.png);
+            background-size: 2000px 890px;
+            background-position: 0px 0px;
+            background-color: #6596ed;
+        }
+    </style>
+</head>
+
+<body>
+<script src="scripts/VimeWorldAPI.js"></script>
+<script src="scripts/Graph.js"></script>
+
+<div style="color: white; font-size: 35px"></div>
+<div class="block-horizontal background-home5">
+    <div style="color: rgba(255,255,255,0)">ку<div></div></div>
+    <div id="text" style="color: white;font-size: 75%; margin-inside: 15px;"></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let phrases = $.getJSON("config.json",function (json) {
+                $("#text").text(
+                    json.messages[Math.floor(Math.random() * json.messages.length)]
+                );
+            })
+        });
+    </script>
+    <div style="color: rgba(255,255,255,0)">f</div>
+    <span style="color: #ffffff;">
+        Онлайн кристы: <divLol1 class="online-cristlaix"></divLol1>  <div></div>  Онлайн вайма: <divLol class="online-vimeworld"></divLol>
+        <div style="color: rgba(0,0,0,0);">f</div>
+        <canvas style="border-radius: 15px;
+            box-sizing: border-box; background-color: rgba(28,30,33,0.74)" id="myChart" width="700" height="300"></canvas>
+    </span>
+    <div style="color: white; font-size: 60%">
+        Онлайн обновляется раз в 10 секунд!
+    </div>
+</div>
+</body>
+
+
+</html>
